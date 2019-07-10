@@ -11,19 +11,20 @@ For example, if you are given the number 15, there are 3 possibilities to compos
 The following function shows one way to solve the problem but the code is not ideal or efficient.
 Refactor the code based on what you have learned about code simplicity and efficiency.
 """
+import itertools
+import math
 
-def my_function(X):
+def my_function(max_length):
     solutions = []
-    for x in range(5, X):
-        for y in range(4, X):
-            for z in range(3, X):
-                if (x*x==y*y+z*z):
+    for x, y, z in itertools.product(range(5, max_length), range(4, max_length), range(3, max_length)):
+        if (x == math.sqrt(y**2+z**2)):
                     solutions.append([x, y, z])
-    m = 0
+
+    longest_side = 0
     for solution in solutions:
-        if m < max(solution):
-            m = max(solution)
-    return m
+        if longest_side < max(solution):
+            longest_side = max(solution)
+    return longest_side
 
 X = input("What is the maximal length of the triangle side? Enter a number: ")
 
